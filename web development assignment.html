@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>E-Commerce Portal</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      background: #f5f5f5;
+    }
+    header {
+      background: #232f3e;
+      color: #fff;
+      padding: 15px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    header h1 { margin: 0; }
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 15px;
+      font-weight: bold;
+    }
+    nav a:hover {
+      text-decoration: underline;
+    }
+    main {
+      padding: 20px;
+    }
+    .page { display: none; }
+    .active { display: block; }
+    .product {
+      background: white;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      padding: 15px;
+      margin: 10px;
+      display: inline-block;
+      width: 200px;
+      text-align: center;
+    }
+    input, textarea, button {
+      padding: 10px;
+      width: 100%;
+      margin: 5px 0;
+    }
+    button {
+      background: #232f3e;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #37475a;
+    }
+    footer {
+      background: #232f3e;
+      color: #fff;
+      text-align: center;
+      padding: 10px;
+      position: fixed;
+      bottom: 0;
+      width: 100%;
+    }
+    .error {
+      color: red;
+      font-size: 0.9em;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>ShopEasy</h1>
+    <nav>
+      <a href="#" onclick="showPage('home')">Home</a>
+      <a href="#" onclick="showPage('products')">Products</a>
+      <a href="#" onclick="showPage('about')">About Us</a>
+      <a href="#" onclick="showPage('contact')">Contact Us</a>
+      <a href="#" onclick="showPage('login')">Login/Register</a>
+    </nav>
+  </header>
+
+  <main>
+    <!-- Home Page -->
+    <section id="home" class="page active">
+      <h2>Welcome to ShopEasy</h2>
+      <p>Your one-stop shop for all your needs!</p>
+      <h3>Customer Care & Reporting</h3>
+      <ul>
+        <li>Track Orders</li>
+        <li>Wishlist Management</li>
+        <li>Comments & Reviews</li>
+        <li>Customer Support</li>
+      </ul>
+    </section>
+
+    <!-- Products Page -->
+    <section id="products" class="page">
+      <h2>Products</h2>
+      <div class="product">
+        <img src="https://tse2.mm.bing.net/th/id/OIP.bWXlTKYiejyABUEz5IZkGgHaEo?cb=ucfimg2ucfimg=1&rs=1&pid=ImgDetMain&o=7&rm=3" width=200 height=200;>
+        <h3>Smartphone</h3>
+        <p>Price: $499</p>
+        <button>Add to Wishlist</button>
+      </div>
+      <div class="product">
+<img src="https://th.bing.com/th/id/OIP.Dno__6b0G4ssuVwlsPp5GgHaHa?w=157&h=180&c=7&r=0&o=7&cb=ucfimg2&dpr=1.3&pid=1.7&rm=3&ucfimg=1" width=200 height=200;>
+        <h3>Laptop</h3>
+        <p>Price: $899</p>
+        <button>Add to Wishlist</button>
+      </div>
+      <div class="product">
+<img src="https://rosepng.com/wp-content/uploads/2024/02/s11728_headphones_isolated_on_white_background_-stylize_200__579c8d13-393a-4794-b285-64d7c75c2767_3-photoroom-png-photoroom_11zoncOftugS.png" width=200 height=200;
+        <h3>Headphones</h3>
+        <p>Price: $199</p>
+        <button>Add to Wishlist</button>
+      </div>
+    </section>
+
+    <!-- About Us Page -->
+    <section id="about" class="page">
+      <h2>About Us</h2>
+      <p>ShopEasy is a trusted e-commerce platform offering a wide range of products with fast delivery and excellent customer service.</p>
+      <h3>Our Mission</h3>
+      <p>To make online shopping simple, fast, and affordable for everyone.</p>
+    </section>
+
+    <!-- Contact Us Page -->
+    <section id="contact" class="page">
+      <h2>Contact Us</h2>
+      <form onsubmit="return validateContact()">
+        <label>Name:</label>
+        <input type="text" id="contactName" />
+        <span class="error" id="contactNameError"></span>
+
+        <label>Email:</label>
+        <input type="email" id="contactEmail" />
+        <span class="error" id="contactEmailError"></span>
+
+        <label>Message:</label>
+        <textarea id="contactMsg"></textarea>
+        <span class="error" id="contactMsgError"></span>
+
+        <button type="submit">Send Message</button>
+      </form>
+    </section>
+
+    <!-- Login/Register Page -->
+    <section id="login" class="page">
+      <h2>User Login / Registration</h2>
+      <div id="loginForm">
+        <h3>Login</h3>
+        <form onsubmit="return validateLogin()">
+          <label>Email:</label>
+          <input type="email" id="loginEmail" />
+          <span class="error" id="loginEmailError"></span>
+
+          <label>Password:</label>
+          <input type="password" id="loginPassword" />
+          <span class="error" id="loginPasswordError"></span>
+
+          <button type="submit">Login</button>
+        </form>
+      </div>
+
+      <div id="registerForm">
+        <h3>Register</h3>
+        <form onsubmit="return validateRegister()">
+          <label>Full Name:</label>
+          <input type="text" id="regName" />
+          <span class="error" id="regNameError"></span>
+
+          <label>Email:</label>
+          <input type="email" id="regEmail" />
+          <span class="error" id="regEmailError"></span>
+
+          <label>Password:</label>
+          <input type="password" id="regPassword" />
+          <span class="error" id="regPasswordError"></span>
+
+          <label>Confirm Password:</label>
+          <input type="password" id="regConfirm" />
+          <span class="error" id="regConfirmError"></span>
+
+          <button type="submit">Register</button>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    © 2025 ShopEasy | All Rights Reserved
+  </footer>
+
+  <script>
+    // Navigation
+    function showPage(pageId) {
+      document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+      document.getElementById(pageId).classList.add('active');
+    }
+
+    // Contact form validation
+    function validateContact() {
+      let valid = true;
+      const name = document.getElementById("contactName").value.trim();
+      const email = document.getElementById("contactEmail").value.trim();
+      const msg = document.getElementById("contactMsg").value.trim();
+
+      document.getElementById("contactNameError").textContent = "";
+      document.getElementById("contactEmailError").textContent = "";
+      document.getElementById("contactMsgError").textContent = "";
+
+      if (name === "") {
+        document.getElementById("contactNameError").textContent = "Name required";
+        valid = false;
+      }
+      if (!email.includes("@")) {
+        document.getElementById("contactEmailError").textContent = "Invalid email";
+        valid = false;
+      }
+      if (msg.length < 10) {
+        document.getElementById("contactMsgError").textContent = "Message too short";
+        valid = false;
+      }
+      return valid;
+    }
+
+    // Login validation
+    function validateLogin() {
+      let valid = true;
+      const email = document.getElementById("loginEmail").value.trim();
+      const password = document.getElementById("loginPassword").value.trim();
+
+      document.getElementById("loginEmailError").textContent = "";
+      document.getElementById("loginPasswordError").textContent = "";
+
+      if (!email.includes("@")) {
+        document.getElementById("loginEmailError").textContent = "Enter valid email";
+        valid = false;
+      }
+      if (password.length < 6) {
+        document.getElementById("loginPasswordError").textContent = "Min 6 characters";
+        valid = false;
+      }
+      return valid;
+    }
+
+    // Registration validation
+    function validateRegister() {
+      let valid = true;
+      const name = document.getElementById("regName").value.trim();
+      const email = document.getElementById("regEmail").value.trim();
+      const password = document.getElementById("regPassword").value.trim();
+      const confirm = document.getElementById("regConfirm").value.trim();
+
+      document.getElementById("regNameError").textContent = "";
+      document.getElementById("regEmailError").textContent = "";
+      document.getElementById("regPasswordError").textContent = "";
+      document.getElementById("regConfirmError").textContent = "";
+
+      if (name === "") {
+        document.getElementById("regNameError").textContent = "Name required";
+        valid = false;
+      }
+      if (!email.includes("@")) {
+        document.getElementById("regEmailError").textContent = "Enter valid email";
+        valid = false;
+      }
+      if (password.length < 6) {
+        document.getElementById("regPasswordError").textContent = "Min 6 characters";
+        valid = false;
+      }
+      if (password !== confirm) {
+        document.getElementById("regConfirmError").textContent = "Passwords do not match";
+        valid = false;
+      }
+      return valid;
+    }
+  </script>
+
+</body>
+</html>
